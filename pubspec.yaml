@@ -25,7 +25,6 @@ dev_dependencies:
   equatable: ^2.0.3
   firebase_core: ^1.11.0
   firebase_auth: ^3.3.6
-  flutter_signin_button: ^2.0.0
   shared_preferences: ^2.0.12
   flutterfire_cli: ^0.1.1+2
   flutterfire_ui: ^0.3.2
