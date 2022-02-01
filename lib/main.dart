@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'UserInterface/home_page.dart';
 import 'firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutterfire_ui/auth.dart';
@@ -30,7 +31,7 @@ class AuthGate extends StatelessWidget {
           );
         }
         // Render your application if authenticated
-        return const MyApp();
+        return const HomePage();
       },
     );
   }
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       home: AuthGate(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -56,22 +58,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
         title: Text(widget.title),
       ),
-      body: Center(
+      body: const Center(
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
