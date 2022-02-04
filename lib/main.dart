@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'UserInterface/home_page.dart';
 import 'firebase_options.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutterfire_ui/auth.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,18 +14,37 @@ void main() async {
 }
 
 
+class AuthGate extends StatelessWidget {
+  const AuthGate({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        // User is not signed in
+        if (!snapshot.hasData) {
+          return const SignInScreen(
+              providerConfigs: [
+                EmailProviderConfiguration(),
+              ]
+          );
+        }
+        // Render your application if authenticated
+        return const HomePage();
+      },
+    );
+  }
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    return const MaterialApp(
+      home: AuthGate(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -36,40 +58,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
         title: Text(widget.title),
       ),
-      body: Center(
-
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+      body: const Center(
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
