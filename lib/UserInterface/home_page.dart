@@ -1,4 +1,5 @@
 //HomePage()
+import 'package:easy_fuel_2/UserInterface/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 
@@ -95,7 +96,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   title: Text('Home'),
                 ),
                 ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => UserProfile()));
+                  },
                   leading: Icon(Icons.account_circle_rounded),
                   title: Text('Profile'),
                 ),

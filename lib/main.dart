@@ -27,6 +27,7 @@ class AuthGate extends StatelessWidget {
           return const SignInScreen(
               providerConfigs: [
                 EmailProviderConfiguration(),
+                PhoneProviderConfiguration()
               ]
           );
         }
