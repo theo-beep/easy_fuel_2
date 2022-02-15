@@ -1,4 +1,5 @@
 import 'package:easy_fuel_2/UserInterface/home_page.dart';
+import 'package:easy_fuel_2/UserInterface/profile_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -33,6 +34,12 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   void _onIntroEnd(context) {
     Navigator.of(context).push(
       MaterialPageRoute(builder: (_) => HomePage()),
+    );
+  }
+
+  void _goToProfile(context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) => const UserProfile()),
     );
   }
 
@@ -91,11 +98,9 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           body: "Complete your profile so that we can tailor a better experience for you",
           image: _buildImage('img1.jpg'),
           footer: ElevatedButton(
-            onPressed: () {
-              introKey.currentState?.animateScroll(0);
-            },
+            onPressed: () => _goToProfile(context),
             child: const Text(
-              'FooButton',
+              'Complete profile ',
               style: TextStyle(color: Colors.white),
             ),
             style: ElevatedButton.styleFrom(
