@@ -1,9 +1,11 @@
 
+import 'package:easy_fuel_2/Models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_fuel_2/Widgets/profile_widget.dart';
 import 'package:easy_fuel_2/Widgets/textfield_widget.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_fuel_2/FirebaseFirestore/add_user_to_firestore.dart';
 
 void main() => runApp(const UserProfile());
 
@@ -64,7 +66,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           ElevatedButton(
             style: style,
             onPressed: () {
-              createUser();
             },
             child: const Text('Enabled'),
           ),
@@ -73,18 +74,5 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     );
   }
 
-  void createUser() {
-    // Create a CollectionReference called users that references the firestore collection
-    CollectionReference users = FirebaseFirestore.instance.collection('users');
 
-    users
-          .add({
-        'username': "Theo", // John Doe
-        'email': "email", // Stokes and Sons
-        'age': "07474257405" // 42
-      })
-          .then((value) => print("User Added"))
-          .catchError((error) => print("Failed to add user: $error"));
-
-  }
 }
