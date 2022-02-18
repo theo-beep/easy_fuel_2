@@ -1,52 +1,58 @@
-class User {
-  String image;
-  String name;
-  String email;
-  String phone;
-  bool delivery;
-  String aboutMeDescription;
 
-  // Constructor
-  User({
-    required this.image,
+class User {
+  final String imagePath;
+  final String name;
+  final String email;
+  final String cellphone;
+  final bool delivery;
+  final bool isDarkMode;
+
+  const User({
+    required this.imagePath,
     required this.name,
     required this.email,
-    required this.phone,
+    required this.cellphone,
     required this.delivery,
-    required this.aboutMeDescription,
+    required this.isDarkMode,
   });
 
-  User copy({
+  User copyWith({
     String? imagePath,
     String? name,
-    String? phone,
     String? email,
-    String? about,
-  }) =>
-      User(
-        image: imagePath ?? image,
-        name: name ?? this.name,
-        email: email ?? this.email,
-        phone: phone ?? this.phone,
-        aboutMeDescription: about ?? aboutMeDescription,
-        delivery: false,
-      );
+    String? cellphone,
+    bool? delivery,
+    bool? isDarkMode,
+  }) {
+    return User(
+      imagePath: imagePath ?? this.imagePath,
+      name: name ?? this.name,
+      email: email ?? this.email,
+      cellphone: cellphone ?? this.cellphone,
+      delivery: delivery ?? this.delivery,
+      isDarkMode: isDarkMode ?? this.isDarkMode,
+    );
+  }
 
-  static User fromJson(Map<String, dynamic> json) => User(
-    image: json['imagePath'],
-    name: json['name'],
-    email: json['email'],
-    aboutMeDescription: json['about'],
-    phone: json['phone'],
-    delivery: json['delivery']
-  );
+  Map<String, dynamic> toMap() {
+    return {
+      'imagePath': this.imagePath,
+      'name': this.name,
+      'email': this.email,
+      'cellphone': this.cellphone,
+      'delivery': this.delivery,
+      'isDarkMode': this.isDarkMode,
+    };
+  }
 
-  Map<String, dynamic> toJson() => {
-    'imagePath': image,
-    'name': name,
-    'email': email,
-    'about': aboutMeDescription,
-    'phone': phone,
-    'delivery': delivery
-  };
+  factory User.fromMap(Map<String, dynamic> map) {
+    return User(
+      imagePath: map['imagePath'] as String,
+      name: map['name'] as String,
+      email: map['email'] as String,
+      cellphone: map['cellphone'] as String,
+      delivery: map['delivery'] as bool,
+      isDarkMode: map['isDarkMode'] as bool,
+    );
+  }
 }

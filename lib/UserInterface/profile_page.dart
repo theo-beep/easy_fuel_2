@@ -66,6 +66,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           ElevatedButton(
             style: style,
             onPressed: () {
+              User u = new User (
+                  imagePath: "https://lite-images-i.scdn.co/image/ab67616d0000b27301830dd8d2e45189fe8e0451",
+                  name: "theolin",
+                  email: "theolin57@gmail.com",
+                  cellphone: "0747407856",
+                  delivery: false,
+                  isDarkMode: false);
+                  createUser(u);
             },
             child: const Text('Enabled'),
           ),
