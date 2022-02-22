@@ -1,5 +1,5 @@
 
-class User {
+class myUser {
   final String imagePath;
   final String name;
   final String email;
@@ -7,7 +7,7 @@ class User {
   final bool delivery;
   final bool isDarkMode;
 
-  const User({
+  const myUser({
     required this.imagePath,
     required this.name,
     required this.email,
@@ -16,7 +16,7 @@ class User {
     required this.isDarkMode,
   });
 
-  User copyWith({
+  myUser copyWith({
     String? imagePath,
     String? name,
     String? email,
@@ -24,7 +24,7 @@ class User {
     bool? delivery,
     bool? isDarkMode,
   }) {
-    return User(
+    return myUser(
       imagePath: imagePath ?? this.imagePath,
       name: name ?? this.name,
       email: email ?? this.email,
@@ -45,8 +45,8 @@ class User {
     };
   }
 
-  factory User.fromMap(Map<String, dynamic> map) {
-    return User(
+  factory myUser.fromMap(Map<String, dynamic> map) {
+    return myUser(
       imagePath: map['imagePath'] as String,
       name: map['name'] as String,
       email: map['email'] as String,

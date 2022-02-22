@@ -2,6 +2,8 @@
 import 'package:easy_fuel_2/UserInterface/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(HomePage());
@@ -19,6 +21,14 @@ class HomePage extends StatelessWidget {
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
+
+
+  void saveLoggedInUser(a) async{
+    FirebaseAuth auth = FirebaseAuth.instance;
+    final prefs = await SharedPreferences.getInstance();
+    String? userEmail =  auth.currentUser?.email;
+    await prefs.setString('userEmail',userEmail!);
+  }
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -138,4 +148,6 @@ class _HomeScreenState extends State<HomeScreen> {
     // _advancedDrawerController.value = AdvancedDrawerValue.visible();
     _advancedDrawerController.showDrawer();
   }
+
+
 }

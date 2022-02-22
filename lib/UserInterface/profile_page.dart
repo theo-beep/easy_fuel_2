@@ -1,11 +1,14 @@
 
+import 'package:easy_fuel_2/FirebaseFirestore/addingtodb.dart';
 import 'package:easy_fuel_2/Models/user_model.dart';
+
 import 'package:flutter/material.dart';
 import 'package:easy_fuel_2/Widgets/profile_widget.dart';
 import 'package:easy_fuel_2/Widgets/textfield_widget.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_fuel_2/FirebaseFirestore/add_user_to_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 void main() => runApp(const UserProfile());
 
@@ -66,14 +69,15 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           ElevatedButton(
             style: style,
             onPressed: () {
-              User u = new User (
+             myUser u = const myUser (
                   imagePath: "https://lite-images-i.scdn.co/image/ab67616d0000b27301830dd8d2e45189fe8e0451",
                   name: "theolin",
                   email: "theolin57@gmail.com",
                   cellphone: "0747407856",
                   delivery: false,
                   isDarkMode: false);
-                  createUser(u);
+                  //createUser2(u);
+                createUser2(u);
             },
             child: const Text('Enabled'),
           ),

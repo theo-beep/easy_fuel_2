@@ -1,12 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_fuel_2/Models/user_model.dart';
-import 'package:easy_fuel_2/UserInterface/profile_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-void createUser(User u) {
 
-  CollectionReference users = FirebaseFirestore.instance.collection('users');
+void createUser(myUser u) async {
 
-  users
+  // Obtain shared preferences.
+  final prefs = await SharedPreferences.getInstance();
+  FirebaseAuth auth = FirebaseAuth.instance;
+  var uid = auth.currentUser?.uid.toString();
+
+  final String? email = prefs.getString('userEmail');
+  CollectionReference usersRef = FirebaseFirestore.instance.collection('users');
+
+  usersRef
       .add(
       {
           'imagePath':u.imagePath,
@@ -18,4 +26,5 @@ void createUser(User u) {
       })
       .then((value) => print("User Added"))
       .catchError((error) => print("Failed to add user: $error"));
+
 }
