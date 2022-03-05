@@ -1,6 +1,10 @@
 //HomePage()
+import 'package:easy_fuel_2/UserInterface/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:easy_fuel_2/ColorConstants.dart';
 
 void main() {
   runApp(HomePage());
@@ -11,6 +15,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: HomeScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -18,6 +23,14 @@ class HomePage extends StatelessWidget {
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
+
+
+  void saveLoggedInUser(a) async{
+    FirebaseAuth auth = FirebaseAuth.instance;
+    final prefs = await SharedPreferences.getInstance();
+    String? userEmail =  auth.currentUser?.email;
+    await prefs.setString('userEmail',userEmail!);
+  }
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -26,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return AdvancedDrawer(
-      backdropColor: Colors.blueGrey,
+      backdropColor: ColorConstants.primaryColor,
       controller: _advancedDrawerController,
       animationCurve: Curves.easeInOut,
       animationDuration: const Duration(milliseconds: 300),
@@ -46,7 +59,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Advanced Drawer Example'),
           leading: IconButton(
             onPressed: _handleMenuButtonPressed,
             icon: ValueListenableBuilder<AdvancedDrawerValue>(
@@ -64,6 +76,26 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         body: Container(),
+        bottomNavigationBar: BottomNavigationBar(
+          selectedItemColor: ColorConstants.primaryColor,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home_rounded),
+              label: 'Home',
+              backgroundColor: Colors.white
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.map_rounded),
+              label: 'Delivery',
+                backgroundColor: Colors.white
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.school),
+              label: 'School',
+              backgroundColor: Colors.white
+            ),
+          ],
+        ),
       ),
       drawer: SafeArea(
         child: Container(
@@ -95,7 +127,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   title: Text('Home'),
                 ),
                 ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => UserProfile()));
+                  },
                   leading: Icon(Icons.account_circle_rounded),
                   title: Text('Profile'),
                 ),
@@ -135,4 +169,6 @@ class _HomeScreenState extends State<HomeScreen> {
     // _advancedDrawerController.value = AdvancedDrawerValue.visible();
     _advancedDrawerController.showDrawer();
   }
+
+
 }
