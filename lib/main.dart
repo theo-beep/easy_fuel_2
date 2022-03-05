@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'UserInterface/home_page.dart';
 import 'UserInterface/onboarding_page.dart';
 import 'firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,7 +12,6 @@ void main() async {
   );
   runApp(const MyApp());
 }
-
 
 class AuthGate extends StatelessWidget {
   const AuthGate({Key? key}) : super(key: key);
@@ -60,7 +58,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ) ,
-      home: AuthGate(),
+      home: const AuthGate(),
       debugShowCheckedModeBanner: false,
     );
   }
