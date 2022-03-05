@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return AdvancedDrawer(
-      backdropColor: ColorConstants.primaryColor,
+      backdropColor: secondaryColor,
       controller: _advancedDrawerController,
       animationCurve: Curves.easeInOut,
       animationDuration: const Duration(milliseconds: 300),
@@ -59,6 +59,8 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: primaryColor,
+          elevation: 0.0,
           leading: IconButton(
             onPressed: _handleMenuButtonPressed,
             icon: ValueListenableBuilder<AdvancedDrawerValue>(
@@ -75,9 +77,16 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        body: Container(),
+        body: Container(
+              height: 148,
+              decoration: const BoxDecoration(
+              color: primaryColor,
+              borderRadius: BorderRadius.only( bottomRight: Radius.circular(16.0),bottomLeft: Radius.circular(16.0))
+              ),
+        ),
         bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: ColorConstants.primaryColor,
+          selectedItemColor: primaryColor,
+          unselectedItemColor: kUnselectedItem,
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home_rounded),
