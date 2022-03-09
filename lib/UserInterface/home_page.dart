@@ -1,10 +1,13 @@
 //HomePage()
 import 'package:easy_fuel_2/UserInterface/profile_page.dart';
+import 'package:easy_fuel_2/UserInterface/request_fuel.dart';
+import 'package:easy_fuel_2/Widgets/search_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:easy_fuel_2/ColorConstants.dart';
+
 
 void main() {
   runApp(HomePage());
@@ -35,6 +38,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final _advancedDrawerController = AdvancedDrawerController();
+   int _currentindex = 0;
+
+  final screens = [
+     HomePage(),
+    RequestFuel(),
+    HomePage(),
+  ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -77,14 +88,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        body: Container(
-              height: 148,
-              decoration: const BoxDecoration(
-              color: primaryColor,
-              borderRadius: BorderRadius.only( bottomRight: Radius.circular(16.0),bottomLeft: Radius.circular(16.0))
-              ),
-        ),
+        body:Container(),
         bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _currentindex,
           selectedItemColor: primaryColor,
           unselectedItemColor: kUnselectedItem,
           items: const [
@@ -104,6 +110,11 @@ class _HomeScreenState extends State<HomeScreen> {
               backgroundColor: Colors.white
             ),
           ],
+          onTap: (index){
+            setState(() {
+              _currentindex = index;
+            });
+          },
         ),
       ),
       drawer: SafeArea(

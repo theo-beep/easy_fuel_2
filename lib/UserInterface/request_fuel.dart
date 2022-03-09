@@ -1,18 +1,20 @@
 
 import 'package:easy_fuel_2/FirebaseFirestore/add_user_to_firestore.dart';
 import 'package:easy_fuel_2/Models/user_model.dart';
+import 'package:easy_fuel_2/Widgets/number_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_fuel_2/Widgets/profile_widget.dart';
 import 'package:easy_fuel_2/Widgets/textfield_widget.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-void main() => runApp(const UserProfile());
+void main() => runApp(const RequestFuel());
 
-class UserProfile extends StatelessWidget {
-  const UserProfile({Key? key}) : super(key: key);
+class RequestFuel extends StatelessWidget {
+  const RequestFuel({Key? key}) : super(key: key);
 
   static const String _title = 'Flutter Code Sample';
+
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +30,7 @@ class UserProfile extends StatelessWidget {
 
 class MyStatefulWidget extends StatefulWidget {
   const MyStatefulWidget({Key? key}) : super(key: key);
+
 
   @override
   State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
@@ -55,15 +58,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         physics: const BouncingScrollPhysics(),
         children: <Widget>[
           const SizedBox(height: 30),
-          ProfileWidget(imagePath: path,
-              onClicked: (){}),
           const SizedBox(height: 24),
-          TextFieldWidget(
-              label: "username",
-              text: name,
-              onChanged: (names) {
-                name = names;
-              }),
+          NumbersWidget(),
           const SizedBox(height: 20),
           TextFieldWidget(
               label: "Email",
@@ -76,25 +72,25 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               onChanged: (name) {}),
           const SizedBox(height: 30),
           Switch(
-          value: delivery,
-          onChanged: (value) {
-          setState((){
-            delivery = value;
-          });}),
+              value: delivery,
+              onChanged: (value) {
+                setState((){
+                  delivery = value;
+                });}),
 
           const SizedBox(height: 30),
           ElevatedButton(
             style: style,
             onPressed: () {
-             myUser u =  myUser (
+              myUser u =  myUser (
                   imagePath: path,
                   name: name,
                   email: email,
                   cellphone: cell,
                   delivery: delivery,
                   isDarkMode: false);
-                  //createUser2(u);
-                createUser(u);
+              //createUser2(u);
+              createUser(u);
             },
             child: const Text('Enabled'),
           ),
@@ -102,4 +98,5 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       ),
     );
   }
+
 }
