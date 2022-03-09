@@ -1,4 +1,5 @@
 
+import 'package:easy_fuel_2/ColorConstants.dart';
 import 'package:easy_fuel_2/FirebaseFirestore/add_user_to_firestore.dart';
 import 'package:easy_fuel_2/Models/user_model.dart';
 import 'package:flutter/material.dart';
@@ -12,14 +13,17 @@ void main() => runApp(const UserProfile());
 class UserProfile extends StatelessWidget {
   const UserProfile({Key? key}) : super(key: key);
 
-  static const String _title = 'Flutter Code Sample';
+  static const String _title = 'Profile';
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: _title,
       home: Scaffold(
-        appBar: AppBar(title: const Text(_title)),
+        appBar: AppBar(
+            title: const Text(_title),
+                backgroundColor: primaryColor,
+        ),
         body: const MyStatefulWidget(),
       ),
     );
@@ -37,7 +41,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   @override
   Widget build(BuildContext context) {
     final ButtonStyle style =
-    ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
+    ElevatedButton.styleFrom(
+        textStyle: const TextStyle(fontSize: 20),
+    );
 
     bool isSwitched = false;
 
