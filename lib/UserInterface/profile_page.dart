@@ -26,6 +26,7 @@ class UserProfile extends StatelessWidget {
         ),
         body: const MyStatefulWidget(),
       ),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -42,8 +43,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   Widget build(BuildContext context) {
     final ButtonStyle style =
     ElevatedButton.styleFrom(
+      primary: primaryColor,
         textStyle: const TextStyle(fontSize: 20),
     );
+    late TextEditingController nameController;
+    late TextEditingController emailController;
+    late TextEditingController cellController;
 
     bool isSwitched = false;
 
@@ -81,13 +86,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               text: cell,
               onChanged: (name) {}),
           const SizedBox(height: 30),
-          Switch(
-          value: delivery,
-          onChanged: (value) {
-          setState((){
-            delivery = value;
-          });}),
-
+          Switch
+            (
+              value: delivery,
+              onChanged: (value) {
+                setState((){
+                  delivery = value;
+                });
+          }),
           const SizedBox(height: 30),
           ElevatedButton(
             style: style,

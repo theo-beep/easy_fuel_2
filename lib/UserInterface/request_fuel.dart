@@ -1,12 +1,12 @@
 
 import 'package:easy_fuel_2/FirebaseFirestore/add_user_to_firestore.dart';
-import 'package:easy_fuel_2/Models/user_model.dart';
 import 'package:easy_fuel_2/Widgets/number_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:easy_fuel_2/Widgets/profile_widget.dart';
 import 'package:easy_fuel_2/Widgets/textfield_widget.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../ColorConstants.dart';
 
 void main() => runApp(const RequestFuel());
 
@@ -21,9 +21,13 @@ class RequestFuel extends StatelessWidget {
     return MaterialApp(
       title: _title,
       home: Scaffold(
-        appBar: AppBar(title: const Text(_title)),
+        appBar: AppBar(
+            title: const Text(_title),
+            backgroundColor: primaryColor,
+        ),
         body: const MyStatefulWidget(),
       ),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -40,17 +44,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   @override
   Widget build(BuildContext context) {
     final ButtonStyle style =
-    ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
+    ElevatedButton.styleFrom(
+        primary: primaryColor,
+        textStyle: const TextStyle(fontSize: 20));
 
     bool isSwitched = false;
 
     //final prefs = await SharedPreferences.getInstance();
-
-    String path="https://lite-images-i.scdn.co/image/ab67616d0000b27301830dd8d2e45189fe8e0451";
-    String name = "theolin";
-    String email="theolin57@gmail.com";
-    String cell = "0747407856";
-    bool delivery = false;
 
     return Center(
       child: ListView(
@@ -59,38 +59,21 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         children: <Widget>[
           const SizedBox(height: 30),
           const SizedBox(height: 24),
-          NumbersWidget(),
           const SizedBox(height: 20),
           TextFieldWidget(
               label: "Email",
-              text: email,
+              text:" " ,
               onChanged: (email) {}),
           const SizedBox(height: 20),
           TextFieldWidget(
               label: "Cellphone",
-              text: cell,
+              text: " ",
               onChanged: (name) {}),
           const SizedBox(height: 30),
-          Switch(
-              value: delivery,
-              onChanged: (value) {
-                setState((){
-                  delivery = value;
-                });}),
-
           const SizedBox(height: 30),
           ElevatedButton(
             style: style,
             onPressed: () {
-              myUser u =  myUser (
-                  imagePath: path,
-                  name: name,
-                  email: email,
-                  cellphone: cell,
-                  delivery: delivery,
-                  isDarkMode: false);
-              //createUser2(u);
-              createUser(u);
             },
             child: const Text('Enabled'),
           ),
@@ -98,5 +81,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       ),
     );
   }
+
 
 }

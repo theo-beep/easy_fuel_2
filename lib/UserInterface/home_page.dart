@@ -88,7 +88,17 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        body:Container(),
+        body:Container(
+          height: 128,
+            decoration: const BoxDecoration(
+              color: primaryColor,
+                borderRadius:  BorderRadius.only(
+                  bottomRight: const Radius.circular(20.0),
+                  bottomLeft: const Radius.circular(20.0),
+                ),
+            ),
+
+        ),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentindex,
           selectedItemColor: primaryColor,
@@ -154,7 +164,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   title: const Text('Profile'),
                 ),
                 ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const RequestFuel()));
+                  },
                   leading: const Icon(Icons.favorite),
                   title: const Text('Favourites'),
                 ),
