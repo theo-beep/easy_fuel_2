@@ -1,13 +1,15 @@
 //HomePage()
 import 'package:easy_fuel_2/UserInterface/profile_page.dart';
 import 'package:easy_fuel_2/UserInterface/request_fuel.dart';
+import 'package:easy_fuel_2/Widgets/categoryCard.dart';
 import 'package:easy_fuel_2/Widgets/search_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:easy_fuel_2/ColorConstants.dart';
-
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 void main() {
   runApp(HomePage());
@@ -38,14 +40,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final _advancedDrawerController = AdvancedDrawerController();
-   int _currentindex = 0;
-
-  final screens = [
-     HomePage(),
-    RequestFuel(),
-    HomePage(),
-  ];
-
+  PersistentTabController _controller = PersistentTabController(initialIndex: 0);
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       child: Scaffold(
         appBar: AppBar(
+          toolbarHeight: 128,
           backgroundColor: primaryColor,
           elevation: 0.0,
           leading: IconButton(
@@ -88,43 +84,19 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        body:Container(
-          height: 128,
-            decoration: const BoxDecoration(
-              color: primaryColor,
-                borderRadius:  BorderRadius.only(
-                  bottomRight: const Radius.circular(20.0),
-                  bottomLeft: const Radius.circular(20.0),
-                ),
-            ),
+        body:
+        Container(
+          child: Column(
+            children: <Widget>[
+              Container(),
+              CategoryWidget(
+                text: 'dfg',
+                onClicked: () {
+                },
+              ),
 
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _currentindex,
-          selectedItemColor: primaryColor,
-          unselectedItemColor: kUnselectedItem,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home_rounded),
-              label: 'Home',
-              backgroundColor: Colors.white
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.map_rounded),
-              label: 'Delivery',
-                backgroundColor: Colors.white
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.school),
-              label: 'School',
-              backgroundColor: Colors.white
-            ),
-          ],
-          onTap: (index){
-            setState(() {
-              _currentindex = index;
-            });
-          },
+            ],
+          )
         ),
       ),
       drawer: SafeArea(
@@ -202,5 +174,28 @@ class _HomeScreenState extends State<HomeScreen> {
     _advancedDrawerController.showDrawer();
   }
 
+  List<Widget> _buildScreens() {
+    return [
+      HomePage(),
+      const RequestFuel()
+    ];
+  }
+
+  List<PersistentBottomNavBarItem> _navBarsItems() {
+    return [
+      PersistentBottomNavBarItem(
+        icon: const Icon(CupertinoIcons.home),
+        title: ("Home"),
+        activeColorPrimary: CupertinoColors.activeBlue,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
+      PersistentBottomNavBarItem(
+        icon: const Icon(CupertinoIcons.settings),
+        title: ("Order Fuel"),
+        activeColorPrimary: CupertinoColors.activeBlue,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
+    ];
+  }
 
 }

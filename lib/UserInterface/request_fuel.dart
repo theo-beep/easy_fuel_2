@@ -66,7 +66,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               onChanged: (email) {}),
           const SizedBox(height: 20),
           TextFieldWidget(
-              label: "Cellphone",
+              label: "Amount",
               text: " ",
               onChanged: (name) {}),
           const SizedBox(height: 30),
