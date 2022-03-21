@@ -24,14 +24,12 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
   @override
   void initState() {
     super.initState();
-
     controller = TextEditingController(text: widget.text);
   }
 
   @override
   void dispose() {
     controller.dispose();
-
     super.dispose();
   }
 
@@ -55,4 +53,5 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
       ),
     ],
   );
+
 }

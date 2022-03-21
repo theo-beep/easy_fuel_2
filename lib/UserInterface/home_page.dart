@@ -1,10 +1,15 @@
 //HomePage()
 import 'package:easy_fuel_2/UserInterface/profile_page.dart';
+import 'package:easy_fuel_2/UserInterface/request_fuel.dart';
+import 'package:easy_fuel_2/Widgets/categoryCard.dart';
+import 'package:easy_fuel_2/Widgets/search_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:easy_fuel_2/ColorConstants.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 void main() {
   runApp(HomePage());
@@ -35,11 +40,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final _advancedDrawerController = AdvancedDrawerController();
+  PersistentTabController _controller = PersistentTabController(initialIndex: 0);
 
   @override
   Widget build(BuildContext context) {
     return AdvancedDrawer(
-      backdropColor: ColorConstants.primaryColor,
+      backdropColor: secondaryColor,
       controller: _advancedDrawerController,
       animationCurve: Curves.easeInOut,
       animationDuration: const Duration(milliseconds: 300),
@@ -55,10 +61,13 @@ class _HomeScreenState extends State<HomeScreen> {
         //     blurRadius: 0.0,
         //   ),
         // ],
-        borderRadius: const BorderRadius.all(Radius.circular(16)),
+        borderRadius: BorderRadius.all(Radius.circular(16)),
       ),
       child: Scaffold(
         appBar: AppBar(
+          toolbarHeight: 128,
+          backgroundColor: primaryColor,
+          elevation: 0.0,
           leading: IconButton(
             onPressed: _handleMenuButtonPressed,
             icon: ValueListenableBuilder<AdvancedDrawerValue>(
@@ -75,26 +84,19 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        body: Container(),
-        bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: ColorConstants.primaryColor,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home_rounded),
-              label: 'Home',
-              backgroundColor: Colors.white
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.map_rounded),
-              label: 'Delivery',
-                backgroundColor: Colors.white
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.school),
-              label: 'School',
-              backgroundColor: Colors.white
-            ),
-          ],
+        body:
+        Container(
+          child: Column(
+            children: <Widget>[
+              Container(),
+              CategoryWidget(
+                text: 'dfg',
+                onClicked: () {
+                },
+              ),
+
+            ],
+          )
         ),
       ),
       drawer: SafeArea(
@@ -113,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     bottom: 64.0,
                   ),
                   clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.black26,
                     shape: BoxShape.circle,
                   ),
@@ -123,29 +125,31 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 ListTile(
                   onTap: () {},
-                  leading: Icon(Icons.home),
-                  title: Text('Home'),
+                  leading: const Icon(Icons.home),
+                  title: const Text('Home'),
                 ),
                 ListTile(
                   onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => UserProfile()));
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const UserProfile()));
                   },
-                  leading: Icon(Icons.account_circle_rounded),
-                  title: Text('Profile'),
+                  leading: const Icon(Icons.account_circle_rounded),
+                  title: const Text('Profile'),
+                ),
+                ListTile(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const RequestFuel()));
+                  },
+                  leading: const Icon(Icons.favorite),
+                  title: const Text('Favourites'),
                 ),
                 ListTile(
                   onTap: () {},
-                  leading: Icon(Icons.favorite),
-                  title: Text('Favourites'),
+                  leading: const Icon(Icons.settings),
+                  title: const Text('Settings'),
                 ),
-                ListTile(
-                  onTap: () {},
-                  leading: Icon(Icons.settings),
-                  title: Text('Settings'),
-                ),
-                Spacer(),
+                const Spacer(),
                 DefaultTextStyle(
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12,
                     color: Colors.white54,
                   ),
@@ -153,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     margin: const EdgeInsets.symmetric(
                       vertical: 16.0,
                     ),
-                    child: Text('Terms of Service | Privacy Policy'),
+                    child: const Text('Terms of Service | Privacy Policy'),
                   ),
                 ),
               ],
@@ -170,5 +174,28 @@ class _HomeScreenState extends State<HomeScreen> {
     _advancedDrawerController.showDrawer();
   }
 
+  List<Widget> _buildScreens() {
+    return [
+      HomePage(),
+      const RequestFuel()
+    ];
+  }
+
+  List<PersistentBottomNavBarItem> _navBarsItems() {
+    return [
+      PersistentBottomNavBarItem(
+        icon: const Icon(CupertinoIcons.home),
+        title: ("Home"),
+        activeColorPrimary: CupertinoColors.activeBlue,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
+      PersistentBottomNavBarItem(
+        icon: const Icon(CupertinoIcons.settings),
+        title: ("Order Fuel"),
+        activeColorPrimary: CupertinoColors.activeBlue,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
+    ];
+  }
 
 }
