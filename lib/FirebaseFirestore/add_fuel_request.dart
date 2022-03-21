@@ -3,7 +3,7 @@ import 'package:easy_fuel_2/Models/add_fuel_request.dart';
 import 'package:easy_fuel_2/Models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-void createUser(addFuelRequest f) async {
+void fuelRequest(addFuelRequest f) async {
   // Obtain shared preferences.
   //final prefs = await SharedPreferences.getInstance();
   //final String? email = prefs.getString('userEmail');

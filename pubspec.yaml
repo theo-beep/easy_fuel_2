@@ -36,6 +36,7 @@ dev_dependencies:
   persistent_bottom_nav_bar: ^4.0.2
   geolocator: ^8.2.0
 
+
 flutter:
   uses-material-design: true
 

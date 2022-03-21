@@ -1,5 +1,6 @@
 
 import 'package:easy_fuel_2/FirebaseFirestore/add_user_to_firestore.dart';
+import 'package:easy_fuel_2/Utils/geoLocationUtil.dart';
 import 'package:easy_fuel_2/Widgets/number_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_fuel_2/Widgets/textfield_widget.dart';
@@ -74,6 +75,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           ElevatedButton(
             style: style,
             onPressed: () {
+
+              geoLocationUtil();
             },
             child: const Text('Enabled'),
           ),
