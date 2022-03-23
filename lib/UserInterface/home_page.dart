@@ -1,4 +1,5 @@
 //HomePage()
+import 'package:easy_fuel_2/UserInterface/onboarding_page.dart';
 import 'package:easy_fuel_2/UserInterface/profile_page.dart';
 import 'package:easy_fuel_2/UserInterface/request_fuel.dart';
 import 'package:easy_fuel_2/Widgets/categoryCard.dart';
@@ -160,9 +161,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   title: const Text('Order History'),
                 ),
                 ListTile(
-                  onTap: () {},
-                  leading: const Icon(Icons.settings),
-                  title: const Text('Settings'),
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) =>  onboard()));
+                  },
+                  leading: const Icon(Icons.info_rounded),
+                  title: const Text('About'),
                 ),
                 const Spacer(),
                 DefaultTextStyle(
