@@ -30,7 +30,8 @@ void fuelRequest(double cost ) async {
     'longitude':position?.longitude,
     'latitude':position?.latitude,
     'cost': cost,
-
+    'delivery cost': cost*0.15,
+    'total': cost*1.15
   })
       .then((value) => print("Fuel Request Added"))
       .catchError((error) => print("Failed to add Fuel Request: $error"));

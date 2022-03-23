@@ -2,6 +2,7 @@
 import 'dart:ffi';
 
 import 'package:easy_fuel_2/FirebaseFirestore/add_user_to_firestore.dart';
+import 'package:easy_fuel_2/UserInterface/home_page.dart';
 import 'package:easy_fuel_2/Utils/geoLocationUtil.dart';
 import 'package:easy_fuel_2/Widgets/number_widget.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +19,6 @@ class RequestFuel extends StatelessWidget {
   const RequestFuel({Key? key}) : super(key: key);
 
   static const String _title = 'Buy Fuel';
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +40,6 @@ class RequestFuel extends StatelessWidget {
 class MyStatefulWidget extends StatefulWidget {
   const MyStatefulWidget({Key? key}) : super(key: key);
 
-
   @override
   State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
 }
@@ -57,8 +55,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     String dropdownValue = 'Petrol 91';
 
     bool isSwitched = false;
-
-
     final costController = TextEditingController();
     //final prefs = await SharedPreferences.getInstance();
 
@@ -113,13 +109,35 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           const SizedBox(height: 30),
           ElevatedButton(
             style: style,
-            onPressed: () {
-              fuelRequest(double.parse(costController.text));
-            },
+            onPressed: () => showDialog<String> (
+              context: context,
+              builder: (BuildContext context) => AlertDialog(
+                title: const Text('Confirm Order '),
+                content:  Text('Your total is '+ totalCost(double.parse(costController.text))),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, 'Cancel'),
+                    child: const Text('Cancel'),
+                  ),
+                  TextButton(
+                    onPressed: (){
+                      fuelRequest(double.parse(costController.text));
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) =>  HomePage()));
+                    } ,
+                    child: const Text('OK'),
+                  ),
+                ],
+              ),
+            ),
             child: const Text('Submit'),
           ),
         ],
       ),
     );
+  }
+
+  String totalCost(double cost) {
+    double total = cost*1.15;
+    return total.toString();
   }
 }
