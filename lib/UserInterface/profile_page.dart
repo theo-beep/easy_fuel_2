@@ -23,7 +23,8 @@ class UserProfile extends StatelessWidget {
           title: const Text(_title),
           backgroundColor: primaryColor,
         ),
-        body: const MyStatefulWidget(),
+        body:
+        const MyStatefulWidget(),
       ),
       debugShowCheckedModeBanner: false,
     );
@@ -55,6 +56,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     String email = "theolin57@gmail.com";
     String cell = "0747407856";
     bool delivery = false;
+
+    const snackBar = SnackBar(
+      content: Text('Changes are saved '),
+    );
+
 
     String label = "name";
 
@@ -147,8 +153,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   cellphone: cellPhoneController.text.toString(),
                   delivery: delivery,
                   isDarkMode: false);
-              //createUser2(u);
               createUser(u);
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
             },
             child: const Text('Save Changes '),
           ),
