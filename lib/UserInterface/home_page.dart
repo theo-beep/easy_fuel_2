@@ -1,4 +1,5 @@
 //HomePage()
+import 'package:easy_fuel_2/UserInterface/onboarding_page.dart';
 import 'package:easy_fuel_2/UserInterface/profile_page.dart';
 import 'package:easy_fuel_2/UserInterface/request_fuel.dart';
 import 'package:easy_fuel_2/Widgets/categoryCard.dart';
@@ -10,6 +11,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:easy_fuel_2/ColorConstants.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+
+import '../Widgets/categoryCard2.dart';
 
 void main() {
   runApp(HomePage());
@@ -65,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: 128,
+          toolbarHeight: 48,
           backgroundColor: primaryColor,
           elevation: 0.0,
           leading: IconButton(
@@ -94,6 +97,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 onClicked: () {
                 },
               ),
+            const SizedBox(
+              height: 24,
+            ),
+              CategoryWidget2(
+                text: 'dfg',
+                onClicked: () {
+                },
+              )
 
             ],
           )
@@ -139,13 +150,22 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => const RequestFuel()));
                   },
-                  leading: const Icon(Icons.favorite),
-                  title: const Text('Favourites'),
+                  leading: const Icon(Icons.shopping_cart),
+                  title: const Text('Order'),
                 ),
                 ListTile(
-                  onTap: () {},
-                  leading: const Icon(Icons.settings),
-                  title: const Text('Settings'),
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const RequestFuel()));
+                  },
+                  leading: const Icon(Icons.book_outlined),
+                  title: const Text('Order History'),
+                ),
+                ListTile(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) =>  onboard()));
+                  },
+                  leading: const Icon(Icons.info_rounded),
+                  title: const Text('About'),
                 ),
                 const Spacer(),
                 DefaultTextStyle(

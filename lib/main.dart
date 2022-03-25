@@ -1,4 +1,5 @@
 import 'package:easy_fuel_2/ColorConstants.dart';
+import 'package:easy_fuel_2/UserInterface/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'UserInterface/onboarding_page.dart';
@@ -31,7 +32,7 @@ class AuthGate extends StatelessWidget {
           );
         }
         // Render your application if authenticated
-        return onboard();
+        return HomePage();
       },
     );
   }
