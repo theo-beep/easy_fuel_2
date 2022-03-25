@@ -1,4 +1,5 @@
 import 'package:easy_fuel_2/ColorConstants.dart';
+import 'package:easy_fuel_2/UserInterface/order_history_page.dart';
 import 'package:easy_fuel_2/UserInterface/request_fuel.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +20,7 @@ class CategoryWidget2 extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const RequestFuel()),
+          MaterialPageRoute(builder: (context) =>  OrderHistory()),
         );
         debugPrint('Card tapped.');
       },
