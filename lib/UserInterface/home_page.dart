@@ -1,5 +1,6 @@
 //HomePage()
 import 'package:easy_fuel_2/UserInterface/main_home_page.dart';
+import 'package:easy_fuel_2/UserInterface/map_page.dart';
 import 'package:easy_fuel_2/UserInterface/onboarding_page.dart';
 import 'package:easy_fuel_2/UserInterface/order_history_page.dart';
 import 'package:easy_fuel_2/UserInterface/profile_page.dart';
@@ -103,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             MainHomePage(),
             OrderHistory(),
-            Icon(Icons.directions_bike),
+            MapPage(),
           ]),
     ),
     drawer: SafeArea(
