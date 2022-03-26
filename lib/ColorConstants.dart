@@ -11,4 +11,5 @@
     const kBlueColor = Color(0xFF817DC0);
     const kShadowColor = Color(0xFFE6E6E6);
    const kUnselectedItem = Color(0xFFB4B3B3);
+   const smokeyWhite = Color(0xFFAEADA3);
 
