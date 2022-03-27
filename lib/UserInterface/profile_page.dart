@@ -37,6 +37,8 @@ class MyStatefulWidget extends StatefulWidget {
   @override
   State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
 }
+bool status = false;
+
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   @override
@@ -46,7 +48,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       textStyle: const TextStyle(fontSize: 20),
     );
 
-    bool isSwitched = false;
+
 
     //final prefs = await SharedPreferences.getInstance();
 
@@ -132,13 +134,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             height: 48.0,
             valueFontSize: 25.0,
             toggleSize: 45.0,
-            value: false,
+            value: status,
             borderRadius: 30.0,
             padding: 8.0,
             showOnOff: false,
             onToggle: (val) {
               setState(() {
-
+                status = val;
               });
             },
           ),
