@@ -20,7 +20,8 @@ class MapPage extends StatelessWidget {
       home: Scaffold(
         body: FlutterMap(
           options: MapOptions(
-            center: LatLng(51.5,-0.09),
+            center: LatLng(-25.783602670969653, 28.335792636819498),
+            //-25.783602670969653, 28.335792636819498
             zoom: 13.0,
           ),
           layers: [

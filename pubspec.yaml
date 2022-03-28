@@ -39,6 +39,7 @@ dev_dependencies:
   flutter_map: ^0.14.0
   latlong2: ^0.8.0
 
+
 flutter:
   uses-material-design: true
 
