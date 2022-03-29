@@ -40,7 +40,7 @@ class MapPage extends StatelessWidget {
                 Marker(
                   width: 80.0,
                   height: 80.0,
-                  point: LatLng(51.5, -0.09),
+                  point: LatLng(37.4217432, -122.0841487),
                   builder: (ctx) =>
                      /* Container(
                         child: FlutterLogo(),

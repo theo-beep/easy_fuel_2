@@ -1,4 +1,5 @@
 //HomePage()
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_fuel_2/UserInterface/main_home_page.dart';
 import 'package:easy_fuel_2/UserInterface/map_page.dart';
 import 'package:easy_fuel_2/UserInterface/onboarding_page.dart';
@@ -21,6 +22,7 @@ void main() {
   runApp(HomePage());
 }
 
+
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -32,8 +34,10 @@ class HomePage extends StatelessWidget {
 }
 
 class HomeScreen extends StatefulWidget {
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
+
 
 
   void saveLoggedInUser(a) async{

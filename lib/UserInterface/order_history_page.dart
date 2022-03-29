@@ -6,17 +6,22 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_fuel_2/ColorConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+
 
 void main() {
   runApp( OrderHistory());
-}
 
+}
+FirebaseAuth auth = FirebaseAuth.instance;
 
 class OrderHistory extends StatelessWidget {
    OrderHistory({Key? key}) : super(key: key);
 
+
    final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance.
-  collection('Fuel').where('Uid', isEqualTo:'ZD0xy7DEdWUpWR43pqhtIyeWOhc2').snapshots();
+  collection('Fuel').where('Uid', isEqualTo:auth.currentUser?.uid ).snapshots();
 
 
   @override
