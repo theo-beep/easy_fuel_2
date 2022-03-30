@@ -19,6 +19,7 @@ class MapPage extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: MapView(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
