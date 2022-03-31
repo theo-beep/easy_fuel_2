@@ -6,6 +6,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'dart:math' show cos, sqrt, asin;
 
+import '../Utils/mapLauncherUtil.dart';
+
 void main() {
   runApp(MapPage());
 }
@@ -540,7 +542,8 @@ class _MapViewState extends State<MapView> {
                           child: Icon(Icons.my_location),
                         ),
                         onTap: () {
-                          mapController.animateCamera(
+                          MapUtils.openMap(-25.78224417017904, 28.338173355657823);
+                          /*mapController.animateCamera(
                             CameraUpdate.newCameraPosition(
                               CameraPosition(
                                 target: LatLng(
@@ -550,7 +553,7 @@ class _MapViewState extends State<MapView> {
                                 zoom: 18.0,
                               ),
                             ),
-                          );
+                          );*/
                         },
                       ),
                     ),
