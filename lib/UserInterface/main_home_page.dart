@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 import '../Widgets/categoryCard.dart';
 import '../Widgets/categoryCard2.dart';
+import '../Widgets/categoryCard3.dart';
 
 void main() {
   runApp(const MainHomePage());
@@ -35,7 +36,12 @@ class MainHomePage extends StatelessWidget {
                   text: 'dfg',
                   onClicked: () {
                   },
-                )
+                ),
+                CategoryWidget3(
+                  text: 'dfg',
+                  onClicked: () {
+                  },
+                ),
 
               ],
             )
