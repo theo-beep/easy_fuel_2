@@ -20,6 +20,7 @@ class RequestFuel extends StatelessWidget {
 
   static const String _title = 'Buy Fuel';
 
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -32,6 +33,7 @@ class RequestFuel extends StatelessWidget {
     );
   }
 }
+String dropdownValue = 'Petrol 91';
 
 class MyStatefulWidget extends StatefulWidget {
   const MyStatefulWidget({Key? key}) : super(key: key);
@@ -48,7 +50,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         primary: primaryColor,
         textStyle: const TextStyle(fontSize: 20));
 
-    String dropdownValue = 'Petrol 91';
+
 
     bool isSwitched = false;
     final costController = TextEditingController();
@@ -117,7 +119,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   ),
                   TextButton(
                     onPressed: (){
-                      fuelRequest(double.parse(costController.text));
+                      fuelRequest(dropdownValue , double.parse(costController.text));
                       Navigator.of(context).push(MaterialPageRoute(builder: (context) =>  HomePage()));
                     } ,
                     child: const Text('OK'),

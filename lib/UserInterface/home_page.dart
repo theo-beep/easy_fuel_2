@@ -17,6 +17,7 @@ import 'package:easy_fuel_2/ColorConstants.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 import '../Widgets/categoryCard2.dart';
+import 'currentOrders.dart';
 
 void main() {
   runApp(HomePage());
@@ -107,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
       TabBarView(
           children: [
             MainHomePage(),
-            OrderHistory(),
+            currentOrders(),
             MapPage(),
           ]),
     ),

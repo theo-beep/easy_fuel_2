@@ -6,7 +6,7 @@ import 'package:geolocator/geolocator.dart';
 
 import '../Utils/geoLocationUtil.dart';
 
-void fuelRequest(double cost ) async {
+void fuelRequest(String type , double cost ) async {
   // Obtain shared preferences.
   //final prefs = await SharedPreferences.getInstance();
   //final String? email = prefs.getString('userEmail');
@@ -25,7 +25,7 @@ void fuelRequest(double cost ) async {
       .add({
     'Uid' : auth.currentUser?.uid,
     'Date': date,
-    'type' : 'Petrol 91',
+    'type' : type,
     'status' : '0',
     'longitude':position?.longitude,
     'latitude':position?.latitude,

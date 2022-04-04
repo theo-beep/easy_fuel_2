@@ -22,7 +22,7 @@ class CategoryWidget3 extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) =>  orderHistoryProgress()),
+          MaterialPageRoute(builder: (context) =>  deliveryProgress()),
         );
         debugPrint('Card tapped.');
       },
