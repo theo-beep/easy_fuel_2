@@ -36,7 +36,7 @@ class _MapViewState extends State<MapView> {
   late GoogleMapController mapController;
 
   late Position _currentPosition;
-  String _currentAddress = '';
+  String _currentAddress = '-25.78224417017904, 28.338173355657823';
 
   final startAddressController = TextEditingController();
   final destinationAddressController = TextEditingController();
