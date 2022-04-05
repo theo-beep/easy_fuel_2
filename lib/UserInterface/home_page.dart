@@ -39,15 +39,9 @@ class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
 
-
-
-  void saveLoggedInUser(a) async{
-    FirebaseAuth auth = FirebaseAuth.instance;
-    final prefs = await SharedPreferences.getInstance();
-    String? userEmail =  auth.currentUser?.email;
-    await prefs.setString('userEmail',userEmail!);
-  }
 }
+
+  bool delivery = false;
 
 class _HomeScreenState extends State<HomeScreen> {
   final _advancedDrawerController = AdvancedDrawerController();
@@ -161,6 +155,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
                 leading: const Icon(Icons.book_outlined),
                 title: const Text('Order History'),
+              ),
+              ListTile(
+                onTap: () async {
+                  await FirebaseAuth.instance.signOut();
+                },
+                leading: const Icon(Icons.logout_outlined),
+                title: const Text('Logout'),
               ),
               ListTile(
                 onTap: () {

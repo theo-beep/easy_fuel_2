@@ -65,7 +65,7 @@ class OrderHistory extends StatelessWidget {
                           status = data['status'].toString();
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) =>  OrderInfo('something')),
+                            MaterialPageRoute(builder: (context) =>  OrderInfo()),
                           );
                         },
                         child:  Container(

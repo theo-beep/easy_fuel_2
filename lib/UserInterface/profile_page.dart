@@ -9,10 +9,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(const UserProfile());
 
+
+
 class UserProfile extends StatelessWidget {
   const UserProfile({Key? key}) : super(key: key);
 
   static const String _title = 'Profile';
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +54,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
 
 
+    SharedPreferences sharedPreferences;
     //final prefs = await SharedPreferences.getInstance();
 
     String path =
@@ -57,7 +62,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     String name = "theolin";
     String email = "theolin57@gmail.com";
     String cell = "0747407856";
-    bool delivery = false;
+
 
     const snackBar = SnackBar(
       content: Text('Changes are saved '),
@@ -148,12 +153,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           ElevatedButton(
             style: style,
             onPressed: () {
+              addToSharedPref(status);
               myUser u = myUser(
                   imagePath: path,
                   name: nameController.text.toString(),
                   email: emailController.text.toString(),
                   cellphone: cellPhoneController.text.toString(),
-                  delivery: delivery,
+                  delivery: status,
                   isDarkMode: false);
               createUser(u);
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -163,5 +169,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         ],
       ),
     );
+  }
+
+ // void addToSharedPref() {}
+
+  addToSharedPref(bool value) async {
+    var sharedPreferences = await SharedPreferences.getInstance();
+    setState(() {
+      sharedPreferences.setBool("delivery", value);
+    });
   }
 }
