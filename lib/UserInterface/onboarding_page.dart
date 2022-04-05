@@ -81,16 +81,16 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       ),
       pages: [
         PageViewModel(
-          title: "Learn as you go",
+          title: "Order Fuel From Anywhere",
           body:
-          "Download the Stockpile app and master the market with our mini-lesson.",
+          "You can easily order fuel to be delivered to you ",
           image: _buildImage('img2.jpg'),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "Kids and teens",
+          title: "Track how much Fuel you are using",
           body:
-          "Kids and teens can track their stocks 24/7 and place trades that you approve.",
+          "You can track your order ",
           image: _buildImage('img3.jpg'),
           decoration: pageDecoration,
         ),
@@ -114,14 +114,9 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "Title of last page - reversed",
+          title: "You can also use this app to deilver fuel",
           bodyWidget: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Text("Click on ", style: bodyStyle),
-              Icon(Icons.edit),
-              Text(" to edit a post", style: bodyStyle),
-            ],
           ),
           decoration: pageDecoration.copyWith(
             bodyFlex: 2,

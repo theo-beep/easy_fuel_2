@@ -16,8 +16,6 @@ class UserProfile extends StatelessWidget {
 
   static const String _title = 'Profile';
 
-
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
