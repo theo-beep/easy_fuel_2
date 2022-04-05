@@ -6,13 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
 
 
-
-void main() {
-  runApp(deliveryProgress());
-}
-
 class deliveryProgress extends StatelessWidget {
   // This widget is the root of your application.
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -26,6 +23,7 @@ class deliveryProgress extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
+  late final String status;
   MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;

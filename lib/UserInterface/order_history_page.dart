@@ -12,12 +12,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'order_info.dart';
 
-
-
-void main() {
-  runApp( OrderHistory());
-
-}
 FirebaseAuth auth = FirebaseAuth.instance;
 
 class OrderHistory extends StatelessWidget {
@@ -65,7 +59,7 @@ class OrderHistory extends StatelessWidget {
                           status = data['status'].toString();
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) =>  OrderInfo()),
+                            MaterialPageRoute(builder: (context) =>  OrderInfo(text:'1')),
                           );
                         },
                         child:  Container(

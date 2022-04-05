@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import '../Widgets/categoryCard.dart';
 import '../Widgets/categoryCard2.dart';
 import '../Widgets/categoryCard3.dart';
+import '../Widgets/temp.dart';
 
 void main() {
   runApp(const MainHomePage());
@@ -23,7 +24,9 @@ class MainHomePage extends StatelessWidget {
         body:       Container(
             child: Column(
               children: <Widget>[
-                Container(),
+                SizedBox(
+                  height: 20,
+                ),
                 CategoryWidget(
                   text: 'dfg',
                   onClicked: () {
@@ -37,12 +40,6 @@ class MainHomePage extends StatelessWidget {
                   onClicked: () {
                   },
                 ),
-                CategoryWidget3(
-                  text: 'dfg',
-                  onClicked: () {
-                  },
-                ),
-
               ],
             )
         ),

@@ -6,12 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
 
 
-
-void main() {
-  runApp(OrderInfo());
-}
-
 class OrderInfo extends StatelessWidget {
+  final String text;
+  OrderInfo({Key? key, required this.text}) : super(key: key);
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -33,7 +30,7 @@ class OrderInfoPage extends StatefulWidget {
 
   final String title;
 
-  @override
+   @override
   _OrderInfoPageState createState() => _OrderInfoPageState();
 }
 
@@ -59,7 +56,7 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
     // Tuple2(Icons.directions_car, StepState.error, ),
   ];
 
-  int _index = 1;
+  int _index = 0;
 
   @override
   Widget build(BuildContext context) {
