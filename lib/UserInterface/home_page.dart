@@ -75,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
         bottom: const TabBar(
           tabs: [
             Tab(icon: Icon(Icons.directions_car)),
-            Tab(icon: Icon(Icons.directions_transit)),
+            Tab(icon: Icon(Icons.fiber_new_rounded)),
             Tab(icon: Icon(Icons.directions)),
           ],
         ),
