@@ -1,5 +1,9 @@
 //HomePage()
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_fuel_2/UserInterface/main_home_page.dart';
+import 'package:easy_fuel_2/UserInterface/map_page.dart';
 import 'package:easy_fuel_2/UserInterface/onboarding_page.dart';
+import 'package:easy_fuel_2/UserInterface/order_history_page.dart';
 import 'package:easy_fuel_2/UserInterface/profile_page.dart';
 import 'package:easy_fuel_2/UserInterface/request_fuel.dart';
 import 'package:easy_fuel_2/Widgets/categoryCard.dart';
@@ -13,10 +17,12 @@ import 'package:easy_fuel_2/ColorConstants.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 import '../Widgets/categoryCard2.dart';
+import 'currentOrders.dart';
 
 void main() {
   runApp(HomePage());
 }
+
 
 class HomePage extends StatelessWidget {
   @override
@@ -29,164 +35,162 @@ class HomePage extends StatelessWidget {
 }
 
 class HomeScreen extends StatefulWidget {
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 
-
-  void saveLoggedInUser(a) async{
-    FirebaseAuth auth = FirebaseAuth.instance;
-    final prefs = await SharedPreferences.getInstance();
-    String? userEmail =  auth.currentUser?.email;
-    await prefs.setString('userEmail',userEmail!);
-  }
 }
+
+  bool delivery = false;
 
 class _HomeScreenState extends State<HomeScreen> {
   final _advancedDrawerController = AdvancedDrawerController();
   PersistentTabController _controller = PersistentTabController(initialIndex: 0);
 
   @override
-  Widget build(BuildContext context) {
-    return AdvancedDrawer(
-      backdropColor: secondaryColor,
-      controller: _advancedDrawerController,
-      animationCurve: Curves.easeInOut,
-      animationDuration: const Duration(milliseconds: 300),
-      animateChildDecoration: true,
-      rtlOpening: false,
-      disabledGestures: false,
-      childDecoration: const BoxDecoration(
-        // NOTICE: Uncomment if you want to add shadow behind the page.
-        // Keep in mind that it may cause animation jerks.
-        // boxShadow: <BoxShadow>[
-        //   BoxShadow(
-        //     color: Colors.black12,
-        //     blurRadius: 0.0,
-        //   ),
-        // ],
-        borderRadius: BorderRadius.all(Radius.circular(16)),
-      ),
-      child: Scaffold(
-        appBar: AppBar(
-          toolbarHeight: 48,
-          backgroundColor: primaryColor,
-          elevation: 0.0,
-          leading: IconButton(
-            onPressed: _handleMenuButtonPressed,
-            icon: ValueListenableBuilder<AdvancedDrawerValue>(
-              valueListenable: _advancedDrawerController,
-              builder: (_, value, __) {
-                return AnimatedSwitcher(
-                  duration: Duration(milliseconds: 250),
-                  child: Icon(
-                    value.visible ? Icons.clear : Icons.menu,
-                    key: ValueKey<bool>(value.visible),
-                  ),
-                );
-              },
-            ),
+  Widget build(BuildContext context) => DefaultTabController(
+      length: 3,
+      child:
+   AdvancedDrawer(
+  backdropColor: secondaryColor,
+  controller: _advancedDrawerController,
+  animationCurve: Curves.easeInOut,
+  animationDuration: const Duration(milliseconds: 300),
+    animateChildDecoration: true,
+    rtlOpening: false,
+    disabledGestures: false,
+    childDecoration: const BoxDecoration(
+      // NOTICE: Uncomment if you want to add shadow behind the page.
+      // Keep in mind that it may cause animation jerks.
+      // boxShadow: <BoxShadow>[
+      //   BoxShadow(
+      //     color: Colors.black12,
+      //     blurRadius: 0.0,
+      //   ),
+      // ],
+      borderRadius: BorderRadius.all(Radius.circular(16)),
+    ),
+    child: Scaffold(
+      appBar: AppBar(
+        bottom: const TabBar(
+          tabs: [
+            Tab(icon: Icon(Icons.directions_car)),
+            Tab(icon: Icon(Icons.fiber_new_rounded)),
+            Tab(icon: Icon(Icons.directions)),
+          ],
+        ),
+        toolbarHeight: 48,
+        backgroundColor: primaryColor,
+        elevation: 0.0,
+        leading: IconButton(
+          onPressed: _handleMenuButtonPressed,
+          icon: ValueListenableBuilder<AdvancedDrawerValue>(
+            valueListenable: _advancedDrawerController,
+            builder: (_, value, __) {
+              return AnimatedSwitcher(
+                duration: Duration(milliseconds: 250),
+                child: Icon(
+                  value.visible ? Icons.clear : Icons.menu,
+                  key: ValueKey<bool>(value.visible),
+                ),
+              );
+            },
           ),
         ),
-        body:
-        Container(
+      ),
+      body:
+      TabBarView(
+          children: [
+            MainHomePage(),
+            currentOrders(),
+            MapPage(),
+          ]),
+    ),
+    drawer: SafeArea(
+      child: Container(
+        child: ListTileTheme(
+          textColor: Colors.white,
+          iconColor: Colors.white,
           child: Column(
-            children: <Widget>[
-              Container(),
-              CategoryWidget(
-                text: 'dfg',
-                onClicked: () {
-                },
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Container(
+                width: 128.0,
+                height: 128.0,
+                margin: const EdgeInsets.only(
+                  top: 24.0,
+                  bottom: 64.0,
+                ),
+                clipBehavior: Clip.antiAlias,
+                decoration: const BoxDecoration(
+                  color: Colors.black26,
+                  shape: BoxShape.circle,
+                ),
+                child: Image.asset(
+                  'assets/images/flutter_logo.png',
+                ),
               ),
-            const SizedBox(
-              height: 24,
-            ),
-              CategoryWidget2(
-                text: 'dfg',
-                onClicked: () {
+              ListTile(
+                onTap: () {},
+                leading: const Icon(Icons.home),
+                title: const Text('Home'),
+              ),
+              ListTile(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const UserProfile()));
                 },
-              )
-
+                leading: const Icon(Icons.account_circle_rounded),
+                title: const Text('Profile'),
+              ),
+              ListTile(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const RequestFuel()));
+                },
+                leading: const Icon(Icons.shopping_cart),
+                title: const Text('Order'),
+              ),
+              ListTile(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const RequestFuel()));
+                },
+                leading: const Icon(Icons.book_outlined),
+                title: const Text('Order History'),
+              ),
+              ListTile(
+                onTap: () async {
+                  await FirebaseAuth.instance.signOut();
+                },
+                leading: const Icon(Icons.logout_outlined),
+                title: const Text('Logout'),
+              ),
+              ListTile(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) =>  onboard()));
+                },
+                leading: const Icon(Icons.info_rounded),
+                title: const Text('About'),
+              ),
+              const Spacer(),
+              DefaultTextStyle(
+                style: const TextStyle(
+                  fontSize: 12,
+                  color: Colors.white54,
+                ),
+                child: Container(
+                  margin: const EdgeInsets.symmetric(
+                    vertical: 16.0,
+                  ),
+                  child: const Text('Terms of Service | Privacy Policy'),
+                ),
+              ),
             ],
-          )
-        ),
-      ),
-      drawer: SafeArea(
-        child: Container(
-          child: ListTileTheme(
-            textColor: Colors.white,
-            iconColor: Colors.white,
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Container(
-                  width: 128.0,
-                  height: 128.0,
-                  margin: const EdgeInsets.only(
-                    top: 24.0,
-                    bottom: 64.0,
-                  ),
-                  clipBehavior: Clip.antiAlias,
-                  decoration: const BoxDecoration(
-                    color: Colors.black26,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Image.asset(
-                    'assets/images/flutter_logo.png',
-                  ),
-                ),
-                ListTile(
-                  onTap: () {},
-                  leading: const Icon(Icons.home),
-                  title: const Text('Home'),
-                ),
-                ListTile(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const UserProfile()));
-                  },
-                  leading: const Icon(Icons.account_circle_rounded),
-                  title: const Text('Profile'),
-                ),
-                ListTile(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const RequestFuel()));
-                  },
-                  leading: const Icon(Icons.shopping_cart),
-                  title: const Text('Order'),
-                ),
-                ListTile(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const RequestFuel()));
-                  },
-                  leading: const Icon(Icons.book_outlined),
-                  title: const Text('Order History'),
-                ),
-                ListTile(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) =>  onboard()));
-                  },
-                  leading: const Icon(Icons.info_rounded),
-                  title: const Text('About'),
-                ),
-                const Spacer(),
-                DefaultTextStyle(
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: Colors.white54,
-                  ),
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(
-                      vertical: 16.0,
-                    ),
-                    child: const Text('Terms of Service | Privacy Policy'),
-                  ),
-                ),
-              ],
-            ),
           ),
         ),
       ),
-    );
-  }
+    ),
+  )
+
+  );
 
   void _handleMenuButtonPressed() {
     // NOTICE: Manage Advanced Drawer state through the Controller.

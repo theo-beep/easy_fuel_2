@@ -18,7 +18,7 @@ class onboard extends StatelessWidget {
     return MaterialApp(
       title: 'Introduction screen',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.blue),
+      theme: ThemeData(primarySwatch: Colors.deepOrange),
       home: OnBoardingPage(),
     );
   }
@@ -105,7 +105,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
               style: TextStyle(color: Colors.white),
             ),
             style: ElevatedButton.styleFrom(
-              primary: Colors.lightBlue,
+              primary: Colors.deepOrange,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.0),
               ),
