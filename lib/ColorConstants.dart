@@ -3,6 +3,7 @@
 
 
     const primaryColor =  Color(0xFFFF5722);
+    const kaccent =  Color(0xFFF1AF9A);
     const secondColor = Color(0xFFE5E1DF);
     const secondaryColor = Color(0xFF718E9E);
     const kBackgroundColor = Color(0xFFF8F8F8);

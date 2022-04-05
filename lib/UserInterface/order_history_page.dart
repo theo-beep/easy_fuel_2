@@ -9,6 +9,7 @@ import 'package:easy_fuel_2/UserInterface/progress_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:intl/date_time_patterns.dart';
 
 import 'order_info.dart';
 
@@ -16,7 +17,6 @@ FirebaseAuth auth = FirebaseAuth.instance;
 
 class OrderHistory extends StatelessWidget {
    OrderHistory({Key? key}) : super(key: key);
-
 
    final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance.
   collection('Fuel').where('Uid', isEqualTo:auth.currentUser?.uid ).snapshots();
@@ -59,19 +59,20 @@ class OrderHistory extends StatelessWidget {
                           status = data['status'].toString();
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) =>  OrderInfo(text:'1')),
+                            MaterialPageRoute(builder: (context) =>  OrderInfo(text: 'w',)),
                           );
                         },
                         child:  Container(
                           height: 150,
                           child: Card(
-                            color: Colors.white,
+                            color: secondColor,
                             child: Row(
                               children: [
                                 Expanded(
                                   flex: 33,
-                                  child: Image.network(
-                                    'https://cdn.24.co.za/files/Cms/General/d/10895/39028d1fc68c48648aae541c60d52822.jpg',
+                                  child: Icon(Icons.local_gas_station,
+                                    size: 60,
+                                    color: kBlueColor,
                                   ),
                                 ),
                                 Expanded(
@@ -80,9 +81,20 @@ class OrderHistory extends StatelessWidget {
                                     children: [
                                       Expanded(
                                         flex: 50,
-                                        child: Center(child: Text('Type :'+data['type'].toString())),
+                                        child: Center(child:
+                                        Text(
+                                            data['type'].toString(),
+                                            style: TextStyle(
+                                          fontSize: 18,
+                                          color: kBlueColor,
+                                        )
+                                        )),
                                       ),
-                                      Expanded(flex: 25, child: Text('Total : '+data['total'].toString())),
+                                      Expanded(
+                                        flex: 25,
+                                        child: Center(child: Text(data['liter'].toString())),
+                                      ),
+                                      Expanded(flex: 25, child: Text('Total : R'+data['total'].toString())),
                                     ],
                                   ),
                                 )

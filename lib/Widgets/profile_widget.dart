@@ -1,6 +1,10 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../ColorConstants.dart';
 
 class ProfileWidget extends StatelessWidget {
   final String imagePath;
@@ -35,15 +39,13 @@ class ProfileWidget extends StatelessWidget {
   Widget buildImage() {
     final image = NetworkImage(imagePath);
 
+
     return ClipOval(
       child: Material(
         color: Colors.transparent,
-        child: Ink.image(
-          image: image,
-          fit: BoxFit.cover,
-          width: 128,
-          height: 128,
-          child: InkWell(onTap: onClicked),
+        child: Icon(Icons.account_circle,
+          size: 120,
+          color: kTextColor,
         ),
       ),
     );

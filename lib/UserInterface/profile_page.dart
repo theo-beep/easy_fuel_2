@@ -140,6 +140,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             value: status,
             borderRadius: 30.0,
             padding: 8.0,
+            activeColor: primaryColor,
             showOnOff: false,
             onToggle: (val) {
               setState(() {

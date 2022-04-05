@@ -10,6 +10,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'home_page.dart';
+import 'map_page.dart';
 
 
 
@@ -91,38 +92,56 @@ class currentOrders extends StatelessWidget {
             }
             return Container(
                 color: Colors.white70,
-
                 child: ListView(
                   children:
                   snapshot.data!.docs.map((DocumentSnapshot document) {
                     Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
-                    
-                    //(item) => item.id == '001'
-                      return  Container(
-                      height: 150,
-                      child: Card(
-                        color: Colors.white,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              flex: 33,
-                              child: Image.network(
-                                'https://cdn.24.co.za/files/Cms/General/d/10895/39028d1fc68c48648aae541c60d52822.jpg',
+                      return  GestureDetector(
+                      onTap: (){
+                        //status = data['status'].toString();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) =>  MapPage()),
+                        );
+                      },
+                      child:  Container(
+                        height: 150,
+                        child: Card(
+                          color: secondColor,
+                          child: Row(
+                            children: [
+                              Expanded(
+                                flex: 33,
+                                child: Icon(Icons.fiber_new,
+                                  size: 60,
+                                  color: kBlueColor,
+                                ),
                               ),
-                            ),
-                            Expanded(
-                              flex: 66,
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                    flex: 50,
-                                    child: Center(child: Text('Type :'+data['type'].toString())),
-                                  ),
-                                  Expanded(flex: 25, child: Text('Total : '+data['total'].toString())),
-                                ],
-                              ),
-                            )
-                          ],
+                              Expanded(
+                                flex: 66,
+                                child: Column(
+                                  children: [
+                                    Expanded(
+                                      flex: 50,
+                                      child: Center(child:
+                                      Text(
+                                          data['type'].toString(),
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            color: kBlueColor,
+                                          )
+                                      )),
+                                    ),
+                                    Expanded(
+                                      flex: 25,
+                                      child: Center(child: Text(data['liter'].toString())),
+                                    ),
+                                    Expanded(flex: 25, child: Text('Total : R'+data['total'].toString())),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     );

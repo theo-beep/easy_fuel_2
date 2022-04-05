@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) => DefaultTabController(
-      length: 3,
+      length: 2,
       child:
    AdvancedDrawer(
   backdropColor: secondaryColor,
@@ -76,7 +76,6 @@ class _HomeScreenState extends State<HomeScreen> {
           tabs: [
             Tab(icon: Icon(Icons.directions_car)),
             Tab(icon: Icon(Icons.fiber_new_rounded)),
-            Tab(icon: Icon(Icons.directions)),
           ],
         ),
         toolbarHeight: 48,
@@ -103,7 +102,6 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             MainHomePage(),
             currentOrders(),
-            MapPage(),
           ]),
     ),
     drawer: SafeArea(
@@ -126,8 +124,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Colors.black26,
                   shape: BoxShape.circle,
                 ),
-                child: Image.asset(
-                  'assets/images/flutter_logo.png',
+                child: Icon(Icons.account_circle,
+                  size: 120,
+                  color: kTextColor,
                 ),
               ),
               ListTile(
@@ -151,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               ListTile(
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const RequestFuel()));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) =>  OrderHistory()));
                 },
                 leading: const Icon(Icons.book_outlined),
                 title: const Text('Order History'),

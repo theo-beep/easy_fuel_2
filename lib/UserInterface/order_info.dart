@@ -7,7 +7,7 @@ import 'package:tuple/tuple.dart';
 
 
 class OrderInfo extends StatelessWidget {
-  final String text;
+   final String text;
   OrderInfo({Key? key, required this.text}) : super(key: key);
   // This widget is the root of your application.
   @override
@@ -29,6 +29,7 @@ class OrderInfoPage extends StatefulWidget {
   OrderInfoPage({Key? key, required this.title}) : super(key: key);
 
   final String title;
+
 
    @override
   _OrderInfoPageState createState() => _OrderInfoPageState();
