@@ -6,7 +6,7 @@ import 'package:geolocator/geolocator.dart';
 
 import '../Utils/geoLocationUtil.dart';
 
-void fuelRequest(String type , double cost ) async {
+void fuelRequest(String liter ,String type , double cost ) async {
   // Obtain shared preferences.
   //final prefs = await SharedPreferences.getInstance();
   //final String? email = prefs.getString('userEmail');
@@ -16,17 +16,15 @@ void fuelRequest(String type , double cost ) async {
   Position? position = await Geolocator.getLastKnownPosition();
 
 
-  DateTime now = new DateTime.now();
-  DateTime date = new DateTime(now.year, now.month, now.day);
-
   final CollectionReference<Map<String, dynamic>> usersRef =
   FirebaseFirestore.instance.collection('Fuel');
   usersRef
       .add({
     'Uid' : auth.currentUser?.uid,
-    'Date': date,
+    'Date': DateTime.now().millisecondsSinceEpoch,
     'type' : type,
     'status' : '0',
+    'liter' : liter,
     'longitude':position?.longitude,
     'latitude':position?.latitude,
     'cost': cost,

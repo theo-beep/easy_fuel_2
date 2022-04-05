@@ -34,6 +34,8 @@ class RequestFuel extends StatelessWidget {
   }
 }
 String dropdownValue = 'Petrol 91';
+String dropdownLiter = '25 liters' ;
+final costController = TextEditingController();
 
 class MyStatefulWidget extends StatefulWidget {
   const MyStatefulWidget({Key? key}) : super(key: key);
@@ -53,7 +55,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
 
     bool isSwitched = false;
-    final costController = TextEditingController();
+
     //final prefs = await SharedPreferences.getInstance();
 
     return Center(
@@ -90,12 +92,47 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               );
             }).toList(),
           ),
+          //Second dropdown
+          const Text(
+            'Select Quantity',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          ),
+          DropdownButton<String>(
+            value: dropdownLiter,
+            icon: const Icon(Icons.arrow_downward),
+            elevation: 16,
+            style: const TextStyle(color: Colors.deepPurple),
+            underline: Container(
+              height: 2,
+              color: Colors.deepPurpleAccent,
+            ),
+            onChanged: (String? newValue) {
+              setState(() {
+                dropdownLiter = newValue!;
+                if(dropdownLiter == '25 liters'){
+                  costController.text = '500';
+                }else if(dropdownLiter == '50 liters'){
+                  costController.text = '1000';
+                }else if(dropdownLiter == '100 liters'){
+                  costController.text = '2000';
+                }
+              });
+            },
+            items: <String>['25 liters','50 liters', '100 liters']
+                .map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+          ),
           const SizedBox(height: 20),
         const Text(
           'Price ',
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
         ),
         TextField(
+          readOnly: true,
           controller: costController,
           decoration: InputDecoration(
             border: OutlineInputBorder(
@@ -119,7 +156,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   ),
                   TextButton(
                     onPressed: (){
-                      fuelRequest(dropdownValue , double.parse(costController.text));
+                      fuelRequest(dropdownLiter, dropdownValue , double.parse(costController.text));
                       Navigator.of(context).push(MaterialPageRoute(builder: (context) =>  HomePage()));
                     } ,
                     child: const Text('OK'),
